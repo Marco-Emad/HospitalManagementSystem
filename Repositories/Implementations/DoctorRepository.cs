@@ -1,11 +1,11 @@
 ﻿using HospitalManagementSystem.Data;
-using HospitalManagementSystem.Interfaces;
 using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace HospitalManagementSystem.Repositories
+namespace HospitalManagementSystem.Repositories.Implementations
 {
-    public class DoctorRepository : Repository<Doctor>, IDoctorRepository
+    public class DoctorRepository : GenericRepository<Doctor>, IDoctorRepository
     {
         public DoctorRepository(HospitalDdContext context) : base(context) { }
 

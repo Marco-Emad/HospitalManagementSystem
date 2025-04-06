@@ -1,7 +1,9 @@
 using HospitalManagementSystem.Data;
-using HospitalManagementSystem.Interfaces;
 using HospitalManagementSystem.Models;
-using HospitalManagementSystem.Repositories;
+using HospitalManagementSystem.Repositories.Implementations;
+using HospitalManagementSystem.Repositories.Interfaces;
+using HospitalManagementSystem.Services.Implementations;
+using HospitalManagementSystem.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -14,8 +16,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HospitalDdContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+//Register Repositories
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
+//Register Services
+builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+
 
 
 var app = builder.Build();

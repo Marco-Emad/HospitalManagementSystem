@@ -1,8 +1,8 @@
 ﻿using HospitalManagementSystem.Models;
 
-namespace HospitalManagementSystem.Interfaces
+namespace HospitalManagementSystem.Repositories.Interfaces
 {
-    public interface IDoctorRepository : IRepository<Doctor>
+    public interface IDoctorRepository : IGenericRepository<Doctor>
     {
         Task<IEnumerable<Doctor>> GetDoctorsWithSpecialtyAsync(string specialty);
     }

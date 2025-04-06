@@ -1,15 +1,15 @@
 ﻿using HospitalManagementSystem.Data;
-using HospitalManagementSystem.Interfaces;
+using HospitalManagementSystem.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace HospitalManagementSystem.Repositories
+namespace HospitalManagementSystem.Repositories.Implementations
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly HospitalDdContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(HospitalDdContext context)
+        public GenericRepository(HospitalDdContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
@@ -21,9 +21,9 @@ namespace HospitalManagementSystem.Repositories
 
         public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 
-        public void UpdateAsync(T entity) => _dbSet.Update(entity);
+        public void Update(T entity) => _dbSet.Update(entity);
 
-        public void DeleteAsync(T entity) => _dbSet.Remove(entity);
+        public void Delete(T entity) => _dbSet.Remove(entity);
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
     }
